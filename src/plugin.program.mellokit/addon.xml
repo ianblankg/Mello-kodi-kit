@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="plugin.program.mellokit" name="Mello Kit Installer" version="1.0.0" provider-name="Mello">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Installs the Mello Kodi Kit</summary>
+    <description lang="en_GB">Downloads the Mello Kit from the home PC over the local network and installs it as this device's Kodi profile. Replaces the current profile.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
