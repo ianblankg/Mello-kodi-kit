@@ -10,7 +10,9 @@ import xbmcvfs
 
 ADDON = xbmcaddon.Addon()
 ADDON_ID = ADDON.getAddonInfo('id')
-DEFAULT_URL = 'http://192.168.1.150:8899/kit.zip'
+DEFAULT_URL = ('https://github.com/ianblankg/Mello-kodi-kit/releases/'
+               'download/kit-v1/mello-kit.zip')
+LAN_URL = 'http://192.168.1.150:8899/kit.zip'
 
 ENABLE_AFTER = [
     'metadata.album.universal', 'metadata.artists.universal',
@@ -74,7 +76,9 @@ def main():
             '[CR]The current build, its addons and settings will be removed.'
             '[CR][CR]Continue?'):
         return
-    url = dlg.input('Kit file URL (on your home PC)', DEFAULT_URL)
+    url = dlg.input(
+        'Kit file URL (GitHub by default; for the home-PC kit, use '
+        + LAN_URL + ')', DEFAULT_URL)
     if not url:
         return
     home = xbmcvfs.translatePath('special://home/')
@@ -107,9 +111,26 @@ def main():
             total = len(infos)
             for i, info in enumerate(infos):
                 parts = [p for p in info.filename.split('/') if p]
-                if len(parts) < 2 or parts[1] not in ('addons', 'userdata'):
+                if len(parts) < 3:
                     continue
-                rel = os.path.join(*parts[1:])
+                top, rest = parts[1], parts[2:]
+                # Backup layout: addons/ sits beside the userdata pieces
+                # (addon_data/, database/, thumbnails/, config/ = the
+                # userdata root files). Map each to its real home.
+                if top == 'addons':
+                    rel = os.path.join('addons', *rest)
+                elif top == 'userdata':
+                    rel = os.path.join('userdata', *rest)
+                elif top == 'config':
+                    rel = os.path.join('userdata', *rest)
+                elif top == 'addon_data':
+                    rel = os.path.join('userdata', 'addon_data', *rest)
+                elif top == 'database':
+                    rel = os.path.join('userdata', 'Database', *rest)
+                elif top == 'thumbnails':
+                    rel = os.path.join('userdata', 'Thumbnails', *rest)
+                else:
+                    continue
                 target = os.path.join(home, rel)
                 if info.is_dir():
                     os.makedirs(target, exist_ok=True)
@@ -139,6 +160,10 @@ def main():
 
     msg = ('Kit installed. Kodi will close now - reopen it to boot '
            'into the kit.')
+    if 'github' in url.lower():
+        msg += ('[CR][CR]The GitHub kit carries no account links. After '
+                'reboot, open Red Light -> Settings and re-link '
+                'Premiumize and Trakt.')
     if failures:
         msg += '[CR][CR]%d files could not be written (first: %s)' % (
             len(failures), failures[0])

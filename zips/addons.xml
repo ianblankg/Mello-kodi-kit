@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.program.mellokit" name="Mello Kit Installer" version="1.0.0" provider-name="Mello">
+<addon id="plugin.program.mellokit" name="Mello Kit Installer" version="1.1.0" provider-name="Mello">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -10,7 +9,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en_GB">Installs the Mello Kodi Kit</summary>
-    <description lang="en_GB">Downloads the Mello Kit from the home PC over the local network and installs it as this device's Kodi profile. Replaces the current profile.</description>
+    <description lang="en_GB">Downloads the Mello Kit (from GitHub by default, or from the home PC over the local network) and installs it as this device's Kodi profile. Replaces the current profile. The GitHub kit carries no account links - re-link Premiumize and Trakt in Red Light after installing it.</description>
     <platform>all</platform>
   </extension>
 </addon>
