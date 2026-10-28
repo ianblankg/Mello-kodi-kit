@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="repository.mello" name="Mello Repository" version="1.0.0" provider-name="Mello">
+  <extension point="xbmc.addon.repository" name="Mello Repository">
+    <dir>
+      <info compressed="false">https://raw.githubusercontent.com/ianblankg/Mello-kodi-kit/main/zips/addons.xml</info>
+      <checksum>https://raw.githubusercontent.com/ianblankg/Mello-kodi-kit/main/zips/addons.xml.md5</checksum>
+      <datadir zip="true">https://raw.githubusercontent.com/ianblankg/Mello-kodi-kit/main/zips/</datadir>
+    </dir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Mello's Kodi addons</summary>
+    <description lang="en_GB">Home of the Mello Kit Installer.</description>
+  </extension>
+</addon>
