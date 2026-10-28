@@ -1,0 +1,1 @@
+The Mello Kit Installer zip (plugin.program.mellokit-1.0.0.zip) belongs in this folder.
